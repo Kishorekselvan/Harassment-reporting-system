@@ -1,0 +1,207 @@
+/* User Dashboard Styles */
+.user-dashboard {
+    min-height: 100vh;
+    width: 100%;
+    padding: 2rem;
+    background: #f5f7fa;
+    color: #333;
+    box-sizing: border-box;
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e1e5eb;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  .file-report-button {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(110, 142, 251, 0.4);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .file-report-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(110, 142, 251, 0.6);
+    animation: glow 1.5s infinite alternate;
+  }
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 10px -10px #a777e3;
+    }
+    to {
+      box-shadow: 0 0 20px 5px #a777e3;
+    }
+  }
+  
+  .reports-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .reports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+  
+  .report-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eaeaea;
+  }
+  
+  .report-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-content {
+    padding: 1.8rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .report-title {
+    font-size: 1.3rem;
+    margin: 0 0 0.8rem 0;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+  
+  .report-description {
+    color: #555;
+    flex: 1;
+    margin: 0.5rem 0 1.2rem;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+  
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+  }
+  
+  .status-badge {
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  
+  .status-badge.open {
+    background: #fff4e6;
+    color: #d35400;
+  }
+  
+  .status-badge.in-progress {
+    background: #e6f3ff;
+    color: #1864ab;
+  }
+  
+  .status-badge.resolved {
+    background: #e6f7e8;
+    color: #2b8a3e;
+  }
+  
+  .view-details {
+    color: #6e8efb;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  .view-details:hover {
+    color: #a777e3;
+    transform: translateX(3px);
+  }
+  
+  .no-reports {
+    text-align: center;
+    padding: 5rem 0;
+    font-size: 1.3rem;
+    color: #666;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .loading-screen,
+  .error-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .error-screen {
+    color: #e74c3c;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1200px) {
+    .reports-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .dashboard-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .user-dashboard {
+      padding: 1.5rem;
+    }
+    
+    .card-content {
+      padding: 1.2rem;
+    }
+  }

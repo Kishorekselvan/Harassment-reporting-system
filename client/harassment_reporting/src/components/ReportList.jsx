@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import '../styles/ReportList.css';
 
 const ReportList = ({ reports }) => {
   const handleDownload = async (reportId) => {
@@ -33,40 +34,52 @@ const ReportList = ({ reports }) => {
     }
   };
 
-  if (!reports.length) return <p>No reports found.</p>;
+  if (!reports.length) return <p className="no-reports">No reports found.</p>;
 
   return (
-    <div className="space-y-6">
+    <div className="report-list-container">
       {reports.map((report, idx) => (
-        <div key={idx} className="p-6 border rounded shadow">
+        <div key={idx} className="report-card">
+          <h1>Report Details</h1>
           <p><strong>Description:</strong> {report.description}</p>
           <p><strong>Location:</strong> {report.location}</p>
 
           {/* Assigned Station Details */}
           {report.assignedStation && (
-            <div className="mt-2">
+            <div className="station-details">
               <p><strong>Assigned Station:</strong> {report.assignedStation.name}</p>
               <p><strong>Station Location:</strong> {report.assignedStation.location}</p>
             </div>
           )}
 
-          {/* Assigned Officers List */}
+          {/* Assigned Officers Table */}
           {report.assignedOfficers && report.assignedOfficers.length > 0 && (
-            <div className="mt-2">
+            <div className="officers-section">
               <strong>Assigned Officers:</strong>
-              <ul className="list-disc list-inside ml-4">
-                {report.assignedOfficers.map((officer, officerIdx) => (
-                  <li key={officerIdx}>
-                    {officer.name} ({officer.rank}) - {officer.email}
-                  </li>
-                ))}
-              </ul>
+              <table className="officers-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Rank</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {report.assignedOfficers.map((officer, officerIdx) => (
+                    <tr key={officerIdx}>
+                      <td>{officer.name}</td>
+                      <td>{officer.rank}</td>
+                      <td>{officer.email}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
 
-          <p className="mt-2">
+          <p className="status-container">
             <strong>Status:</strong>
-            <span className={`status ${report.status ? report.status.toLowerCase() : 'pending'}`}>
+            <span className={`status ${report.status ? report.status.toLowerCase().replace(' ', '-') : 'pending'}`}>
               {report.status || 'Pending'}
             </span>
           </p>
@@ -77,7 +90,7 @@ const ReportList = ({ reports }) => {
           {report.status === "Resolved" && (
             <button
               onClick={() => handleDownload(report._id)}
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="download-btn"
             >
               Download Case History
             </button>

@@ -1,0 +1,116 @@
+/* styles/ReportList.css */
+
+.report-list-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .report-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .report-card h1 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .report-card p {
+    margin: 8px 0;
+    color: #34495e;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .report-card strong {
+    color: #2c3e50;
+    font-weight: 600;
+  }
+  
+  .status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+  
+  .status.pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status.in-progress {
+    background-color: #cce5ff;
+    color: #004085;
+  }
+  
+  .status.resolved {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .officers-table {
+    width: 100%;
+    margin-top: 16px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  
+  .officers-table thead {
+    background-color: #f8f9fa;
+  }
+  
+  .officers-table th, 
+  .officers-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .officers-table th {
+    font-weight: 600;
+    color: #495057;
+  }
+  
+  .officers-table tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .download-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .download-btn:hover {
+    background-color: #2980b9;
+  }
+  
+  .station-details {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+  }
+  
+  .station-details strong {
+    display: inline-block;
+    min-width: 120px;
+  }

@@ -63,7 +63,6 @@
     transition: all 0.3s ease;
     border-left: 4px solid #8B0000;
     width: 100%;
-    max-width: 320px;
   }
   
   .report-card:hover {
