@@ -1,0 +1,148 @@
+/* Admin.css - Laptop-Optimized Full Window */
+* {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  html, body, #root {
+    height: 100%;
+    /* overflow: hidden; Prevents unwanted scrolling */
+  }
+  
+  .admin-container {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr; /* Navbar + Content */
+    background: #f5f5f5;
+    width: 100%;
+  }
+  
+  /* --- Navbar --- */
+  .admin-navbar {
+    background: linear-gradient(135deg, #c62828, #d32f2f);
+    color: white;
+    padding: 0.8rem 2rem;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .navbar-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  .navbar-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+  
+  .navbar-links a:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  /* --- Main Content --- */
+  .admin-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    height: 100%;
+  }
+  
+  #titlename {
+    color: #c62828;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+  
+  .card-container {
+    display: flex;
+    gap: 1.5rem;
+    max-width: 800px; /* Optimized for laptop screens */
+    width: 90%;
+  }
+  
+  .admin-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    padding: 1.5rem;
+    flex: 1;
+    min-width: 250px;
+    cursor: pointer;
+    transition: all 0.25s;
+    border-top: 4px solid #d32f2f;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .admin-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-top: 4px solid #b71c1c;
+  }
+  
+  .admin-card h3 {
+    color: #d32f2f;
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+  }
+  
+  .admin-card p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  /* --- Laptop-Specific Optimizations --- */
+  @media (max-height: 800px) { /* Adjust for smaller laptop screens */
+    .admin-main {
+      padding: 1rem;
+      justify-content: flex-start;
+      padding-top: 1.5rem;
+    }
+    
+    #titlename {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    
+    .card-container {
+      margin-top: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .card-container {
+      flex-direction: column;
+      width: 85%;
+    }
+    
+    .admin-navbar {
+      padding: 0.8rem 1rem;
+    }
+    
+    .navbar-links a {
+      margin-left: 0.8rem;
+      font-size: 0.9rem;
+    }
+  }

@@ -1,0 +1,139 @@
+/* AddPolice.css - Full Screen with Red Theme */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  html, body, #root {
+    height: 100%;
+  }
+  
+  .add-police-container {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 60px 1fr;
+    background: #f8f9fa;
+  }
+  
+  /* Navbar - Matching Admin Theme */
+  .add-police-navbar {
+    background: linear-gradient(to right, #c62828, #d32f2f);
+    color: white;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .navbar-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Main Form Content */
+  .add-police-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    overflow-y: auto;
+  }
+  
+  .add-police-main h1 {
+    color: #c62828;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2rem;
+  }
+  
+  .add-police-form {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    border-left: 4px solid #d32f2f;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border 0.3s;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: #d32f2f;
+    box-shadow: 0 0 0 2px rgba(214, 41, 41, 0.2);
+  }
+  
+  .submit-btn {
+    background: #e00e0e;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+    font-weight: 600;
+  }
+  
+  .submit-btn:hover {
+    background: #b71c1c;
+  }
+  
+  .submit-btn:disabled {
+    background: #e57373;
+    cursor: not-allowed;
+  }
+  
+  .error-message {
+    color: #d32f2f;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 500;
+  }
+  
+  .success-message {
+    color: #2e7d32;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 500;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .add-police-navbar {
+      padding: 0 1rem;
+    }
+    
+    .add-police-main {
+      padding: 1.5rem;
+    }
+    
+    .add-police-form {
+      padding: 1.5rem;
+    }
+  }
