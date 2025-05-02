@@ -79,7 +79,6 @@
   
   .officers-table th {
     font-weight: 600;
-    color: #495057;
   }
   
   .officers-table tr:hover {
@@ -87,7 +86,7 @@
   }
   
   .download-btn {
-    background-color: #3498db;
+    background-color: #db3434;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -100,7 +99,23 @@
   }
   
   .download-btn:hover {
-    background-color: #2980b9;
+    background-color: #29b941;
+  }
+  .back-to-user{
+    background-color: #db3434;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 16px;
+    transition: background-color 0.3s;
+  }
+  .back-to-user:hover{
+    background-color: #29b941;
+
   }
   
   .station-details {

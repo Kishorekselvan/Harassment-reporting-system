@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/AddPolice.css";
-
+import { useNavigate } from "react-router-dom";
 function AddPolice() {
+  const navigate=useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -176,6 +177,8 @@ function AddPolice() {
           >
             {loading ? "Adding Officer..." : "Add Police Officer"}
           </button>
+          <button onClick={()=>navigate('/adminpage')}
+            className="admin-btn">Back to Admin Page</button>
         </form>
 
         {errorMessage && <p className="error-message">{errorMessage}</p>}

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../styles/ViewReportsAdmin.css";
-
+import { useNavigate } from "react-router-dom";
 const ViewReports = () => {
+  const navigate=useNavigate();
   const [reports, setReports] = useState([]);
   const [filteredReports, setFilteredReports] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -63,6 +64,8 @@ const ViewReports = () => {
         <h1 id="titlename">View All Reports</h1>
 
         <div className="status-filter">
+          
+          <button onClick={()=>navigate('/adminpage')}className="admin-btn">Back to adminpage</button>
           <label htmlFor="status-filter">Filter by Status:</label>
           <select
             id="status-filter"
@@ -89,7 +92,7 @@ const ViewReports = () => {
             {filteredReports.map((report) => (
               <div key={report._id} className="report-card">
                 <Link to={`/report-detail/${report._id}`}>
-                  <h3>{report.description}</h3>
+                  <p>{report.description}</p>
                   <p>Status: <span style={{ 
                     color: report.status === 'resolved' ? '#2e7d32' : 
                           report.status === 'pending' ? '#d32f2f' : '#333'

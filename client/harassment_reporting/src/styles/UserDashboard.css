@@ -26,6 +26,29 @@
     margin: 0;
     font-weight: 600;
   }
+  .logout-button-user{
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(110, 142, 251, 0.4);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .logout-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(110, 142, 251, 0.6);
+    animation: glow 1.5s infinite alternate;
+  }
+  
   
   .file-report-button {
     background: linear-gradient(135deg, #6e8efb, #a777e3);

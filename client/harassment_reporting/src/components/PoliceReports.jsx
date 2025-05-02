@@ -44,7 +44,7 @@ function ViewReports() {
     <div className="reports-container">
       <div className="reports-content">
         <div className="reports-header">
-          <h2>📋 View Reports</h2>
+          <h2>📋 Assigned Reports</h2>
         </div>
         
         <div className="reports-grid">
@@ -55,7 +55,7 @@ function ViewReports() {
                 className="report-card"
                 onClick={() => navigate(`/policepage/handle-reports/${report._id}`)}
               >
-                <h3>{report.description || 'No description available'}</h3>
+                <p>{report.description || 'No description available'}</p>
                 <p><strong>Date:</strong> {new Date(report.createdAt).toLocaleDateString()}</p>
                 <p>
                   <strong>Status:</strong> 

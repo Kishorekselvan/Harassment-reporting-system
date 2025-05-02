@@ -161,3 +161,24 @@
       align-items: flex-start;
     }
   }
+  .admin-btn {
+    background: #e00e0e;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+    font-weight: 600;
+  }
+  
+  .admin-btn:hover {
+    background: #b71c1c;
+  }
+  
+  .admin-btn:disabled {
+    background: #e57373;
+    cursor: not-allowed;
+  }

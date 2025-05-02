@@ -46,6 +46,7 @@ function ReportSubmission() {
         <form onSubmit={handleSubmit} className="report-form">
           <div className="form-group">
             <label>Description</label>
+            <p>Make the description clear consice. Our officers will bring justics. Identification details and speicifying the exact location of crime woulb be helpful.</p>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}

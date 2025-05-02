@@ -13,7 +13,7 @@ router.delete("/delete", deleteReport);
 router.get("/search", searchReports); 
 router.post("/:reportId/respond",verifyToken,verifyPolice,respondToReport);
 router.get("/case-history/:reportId", verifyToken,getResolvedReports);
-// GET /api/reports/:id
+
 router.get('/:id', verifyToken, getReportById);
 
 

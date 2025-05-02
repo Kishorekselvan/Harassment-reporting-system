@@ -25,7 +25,7 @@ function PoliceNavbar() {
             `navbar-link ${isActive ? 'active' : ''}`
           }
         >
-          View Reports
+          Assigned Reports
         </NavLink>
         <NavLink 
           to="update-profile" 
@@ -43,6 +43,8 @@ function PoliceNavbar() {
         >
           Update Password
         </NavLink>
+        <NavLink 
+        to='/'>Log out</NavLink>
       </div>
     </nav>
   );

@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import '../styles/ReportList.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const ReportList = ({ reports }) => {
+  const navigate=useNavigate();
   const handleDownload = async (reportId) => {
     try {
       const token = localStorage.getItem('token');
@@ -84,7 +86,8 @@ const ReportList = ({ reports }) => {
             </span>
           </p>
 
-          <p><strong>Response:</strong> {report.response || 'Officer is on the way'}</p>
+          <p><strong>Response:</strong> {report.response || 'The officer still has not responded'}</p>
+          
 
           {/* Download Button */}
           {report.status === "Resolved" && (
@@ -92,9 +95,11 @@ const ReportList = ({ reports }) => {
               onClick={() => handleDownload(report._id)}
               className="download-btn"
             >
-              Download Case History
+              Download Case Investigaton Summary
             </button>
           )}
+          <button onClick={()=>navigate('/userpage')} className='back-to-user'>Back to user page</button>
+         
         </div>
       ))}
     </div>

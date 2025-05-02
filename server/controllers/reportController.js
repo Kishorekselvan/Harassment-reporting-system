@@ -229,8 +229,8 @@ export const getUserReports = async (req, res) => {
       .populate({
         path: "reports",
         populate: [
-          { path: "assignedStation" },  // Populate assignedStation details
-          { path: "assignedOfficers" }, // Populate assignedOfficers details
+          { path: "assignedStation" },  
+          { path: "assignedOfficers" }, 
         ],
       });
 

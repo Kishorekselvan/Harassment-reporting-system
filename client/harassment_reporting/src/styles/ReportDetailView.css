@@ -272,3 +272,15 @@
       grid-template-columns: 1fr;
     }
   }
+  .back-button{
+    background: #e00e0e;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+    font-weight: 600;
+  }

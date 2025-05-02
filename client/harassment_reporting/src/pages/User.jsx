@@ -34,6 +34,10 @@ function User() {
     <div className="user-dashboard">
       <header className="dashboard-header">
         <h1>Reports Dashboard</h1>
+        <Link to='/' className="logout-button-user">
+  Log out
+</Link>
+
         <Link 
           to="/report-submission" 
           className="file-report-button glow-on-hover"
@@ -45,12 +49,7 @@ function User() {
       {!reports.length ? (
         <div className="no-reports">
           <p>You haven't filed any reports yet.</p>
-          <Link 
-            to="/report-submission" 
-            className="file-report-button glow-on-hover"
-          >
-            + File Your First Report
-          </Link>
+          
         </div>
       ) : (
         <div className="reports-grid-container">
@@ -58,9 +57,9 @@ function User() {
             {reports.map((report) => (
               <div key={report._id} className="report-card">
                 <div className="card-content">
-                  <h3 className="report-title">
+                  <p className="report-title">
                     {report.description || "Untitled Report"}
-                  </h3>
+                  </p>
                   
                   <div className="card-footer">
                     <span className={`status-badge ${report.status.toLowerCase()}`}>

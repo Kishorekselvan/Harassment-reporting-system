@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../styles/ReportDetailView.css";
 
 const ReportDetailView = () => {
+  const navigate=useNavigate();
   const { reportId } = useParams();
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,6 +12,7 @@ const ReportDetailView = () => {
 
   const fetchReportDetail = async () => {
     try {
+      
       const token = localStorage.getItem("token");
       const res = await axios.get(`http://localhost:5000/api/admin/reports/`, {
         headers: {
@@ -47,7 +49,9 @@ const ReportDetailView = () => {
         <div className="report-header">
           <div className="header-content">
             <h1>INCIDENT REPORT</h1>
+            <button className="back-button" onClick={()=>navigate('/admin/view-reports')}>Back to reports </button> 
             <div className="header-meta">
+            
              
               <span className={`status-badge ${report.status}`}>
                 {report.status.toUpperCase()}
@@ -55,7 +59,7 @@ const ReportDetailView = () => {
             </div>
           </div>
           <div className="header-footer">
-            <span>Report SUbmitted Date:{new Date(report.createdAt).toLocaleDateString()}</span>
+            <span>Report Submitted Date:{new Date(report.createdAt).toLocaleDateString()}</span>
             <span>Location: {report.location}</span>
           </div>
         </div>
