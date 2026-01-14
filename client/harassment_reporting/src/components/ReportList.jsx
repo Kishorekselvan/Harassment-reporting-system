@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import '../styles/ReportList.css';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate,Link } from 'react-router-dom';
+
 
 const ReportList = ({ reports }) => {
   const navigate=useNavigate();
@@ -42,7 +43,24 @@ const ReportList = ({ reports }) => {
     <div className="report-list-container">
       {reports.map((report, idx) => (
         <div key={idx} className="report-card">
+          <Link
+    to={`/chat/user/${report._id}`}
+    style={{
+      textDecoration: "none",
+      backgroundColor: "#2c3e50",
+      color: "white",
+      padding: "8px 14px",
+      borderRadius: "4px",
+      fontSize: "0.9rem",
+      fontWeight: "500"
+    }}
+  >
+    Chat Box
+  </Link>
           <h1>Report Details</h1>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+  
+</div>
           <p><strong>Description:</strong> {report.description}</p>
           <p><strong>Location:</strong> {report.location}</p>
 

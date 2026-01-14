@@ -7,12 +7,14 @@ import registration from "./routes/registration.js";
 import login from "./routes/login.js";
 import policeRoutes from "./routes/policeRoutes.js";
 import adminRoutes from"./routes/adminRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use("/api/chat", chatRoutes);
 app.use('/api/reports', reportRoutes);
 app.use("/api/auth",registration);
 app.use("/api/auth",login);

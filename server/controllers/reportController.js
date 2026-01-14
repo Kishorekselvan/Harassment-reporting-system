@@ -6,6 +6,7 @@ import multer from "multer";
 import ResolvedReport from "../models/ResolvedReport.js";
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import ChatRoom from "../models/ChatRoom.js";
 
 dotenv.config();
 // export const submitReport = async (req, res) => {
@@ -88,11 +89,12 @@ export const submitReport = async (req, res) => {
     console.log("Assigned officer IDs:", officerIds);
 
     const report = new Report({
-      description,
-      location,
-      assignedStation: station._id,
-      assignedOfficers: officerIds,
-    });
+  description,
+  location,
+  userId,                       // ✅ ADD THIS
+  assignedStation: station._id,
+  assignedOfficers: officerIds,
+});
 
     await report.save();
 
@@ -353,6 +355,9 @@ export const respondToReport = async (req, res) => {
 
     
     await report.save();
+    await ChatRoom.findOneAndUpdate(
+  { reportId },
+  { isLocked: true })
 
     
     res.status(200).json({ message: "Response added successfully", report });

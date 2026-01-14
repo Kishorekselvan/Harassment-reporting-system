@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import axios from 'axios';
  import '../styles/HandleReports.css';
 
@@ -100,7 +100,35 @@ function HandleReport() {
   return (
     <div className="full-screen-report">
       <div className="report-container">
-        <h2 className="report-header">📝 Report Details</h2>
+        <div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "25px",
+    paddingBottom: "15px",
+    borderBottom: "2px solid #8B0000"
+  }}
+>
+  <h2 className="report-header" style={{ borderBottom: "none", marginBottom: 0 }}>
+    📝 Report Details
+  </h2>
+
+  <Link
+    to={`/chat/police/${id}`}
+    style={{
+      textDecoration: "none",
+      backgroundColor: "#2c3e50",
+      color: "white",
+      padding: "10px 18px",
+      borderRadius: "6px",
+      fontSize: "15px",
+      fontWeight: "600"
+    }}
+  >
+    💬 Chat Box
+  </Link>
+</div>
         
         <div className="report-details-grid">
           <div className="detail-card">
