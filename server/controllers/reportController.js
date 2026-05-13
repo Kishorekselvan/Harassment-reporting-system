@@ -77,17 +77,18 @@ export const submitReport = async (req, res) => {
     console.log("Coordinates received:", lat, lng);
 
     // 🔥 Find nearest police station
+    console.log("Finding nearest station for coordinates:", lat, lng);
     const station = await Station.findOne({
       location: {
         $near: {
           $geometry: {
             type: "Point",
             coordinates: [lng, lat] // IMPORTANT: [lng, lat]
-          }
+          },
         }
       }
     }).populate("officers");
-
+console.log("Nearest station found:", station); 
     if (!station) {
       return res.status(404).json({ message: "No station found for this location" });
     }
