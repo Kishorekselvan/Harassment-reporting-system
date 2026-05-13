@@ -1,42 +1,56 @@
 import mongoose from "mongoose";
 
-const reportSchema = new mongoose.Schema({
-  userId: {                                    // ✅ ADD THIS
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  location: {
-    type: String, // e.g., "T Nagar", "Adyar"
-    required: true,
-  },
-  assignedStation: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Station",
-  },
-  assignedOfficers: [
-    {
+const reportSchema = new mongoose.Schema(
+  {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Police",
+      ref: "User",
+      required: true
     },
-  ],
-  status: {
-    type: String,
-    default: "Pending",
+
+    description: {
+      type: String,
+      required: true
+    },
+
+    // 🔥 FIXED: store coordinates instead of string
+    location: {
+      lat: {
+        type: Number,
+        required: true
+      },
+      lng: {
+        type: Number,
+        required: true
+      }
+    },
+
+    assignedStation: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Station"
+    },
+
+    assignedOfficers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Police"
+      }
+    ],
+
+    status: {
+      type: String,
+      default: "Pending"
+    },
+
+    response: {
+      type: String,
+      default: "The Officer is on the way"
+    }
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  response: {
-    type: String,
-    default: "The Officer is on the way",
-    
+  {
+    collection: "reports",
+    timestamps: true // replaces manual createdAt
   }
-}, { collection: 'reports' });
+);
 
 export default mongoose.model("Report", reportSchema);

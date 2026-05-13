@@ -1,78 +1,186 @@
-import React from 'react';
-import axios from 'axios';
-import '../styles/ReportList.css';
-import { Navigate, useNavigate,Link } from 'react-router-dom';
+import React from "react";
+import axios from "axios";
+import "../styles/ReportList.css";
+import { useNavigate, Link } from "react-router-dom";
 
+/* ---------- SAFE RENDER HELPERS ---------- */
+
+const renderReportLocation = (location) => {
+  if (!location) return "Unknown location";
+
+  // New format: { lat, lng }
+  if (typeof location === "object" && "lat" in location && "lng" in location) {
+    return `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
+  }
+
+  // Old format: string
+  if (typeof location === "string") {
+    return location;
+  }
+
+  return "Unknown location";
+};
+
+const renderStationLocation = (location) => {
+  if (!location) return "Unknown";
+
+  // GeoJSON format
+  if (
+    typeof location === "object" &&
+    location.type === "Point" &&
+    Array.isArray(location.coordinates)
+  ) {
+    const [lng, lat] = location.coordinates;
+    return `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  }
+
+  // String fallback
+  if (typeof location === "string") {
+    return location;
+  }
+
+  return "Unknown";
+};
+
+/* ---------- GOOGLE MAP LINK HELPER ---------- */
+
+const getGoogleMapsLink = (location) => {
+  if (!location) return null;
+
+  // Report location: { lat, lng }
+  if (typeof location === "object" && "lat" in location && "lng" in location) {
+    return `https://www.google.com/maps?q=${location.lat},${location.lng}`;
+  }
+
+  // Station location: GeoJSON
+  if (
+    typeof location === "object" &&
+    location.type === "Point" &&
+    Array.isArray(location.coordinates)
+  ) {
+    const [lng, lat] = location.coordinates;
+    return `https://www.google.com/maps?q=${lat},${lng}`;
+  }
+
+  return null;
+};
+
+/* ---------- COMPONENT ---------- */
 
 const ReportList = ({ reports }) => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
   const handleDownload = async (reportId) => {
     try {
-      const token = localStorage.getItem('token');
-      console.log("Token", token);
+      const token = localStorage.getItem("token");
 
       const response = await axios({
         url: `http://localhost:5000/api/reports/case-history/${reportId}`,
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data"
         },
-        responseType: 'blob',
+        responseType: "blob"
       });
 
-      const blob = new Blob([response.data], { type: response.headers['content-type'] || 'application/pdf' });
+      const blob = new Blob([response.data], {
+        type: response.headers["content-type"] || "application/pdf"
+      });
+
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       a.download = `case-history-${reportId}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
       window.URL.revokeObjectURL(url);
-
     } catch (err) {
-      console.error('Download error', err);
+      console.error("Download error", err);
       alert("Failed to download case history PDF.");
     }
   };
 
-  if (!reports.length) return <p className="no-reports">No reports found.</p>;
+  if (!reports || reports.length === 0) {
+    return <p className="no-reports">No reports found.</p>;
+  }
 
   return (
     <div className="report-list-container">
       {reports.map((report, idx) => (
         <div key={idx} className="report-card">
           <Link
-    to={`/chat/user/${report._id}`}
-    style={{
-      textDecoration: "none",
-      backgroundColor: "#2c3e50",
-      color: "white",
-      padding: "8px 14px",
-      borderRadius: "4px",
-      fontSize: "0.9rem",
-      fontWeight: "500"
-    }}
-  >
-    Chat Box
-  </Link>
-          <h1>Report Details</h1>
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-  
-</div>
-          <p><strong>Description:</strong> {report.description}</p>
-          <p><strong>Location:</strong> {report.location}</p>
+            to={`/chat/user/${report._id}`}
+            style={{
+              textDecoration: "none",
+              backgroundColor: "#2c3e50",
+              color: "white",
+              padding: "8px 14px",
+              borderRadius: "4px",
+              fontSize: "0.9rem",
+              fontWeight: "500"
+            }}
+          >
+            Chat Box
+          </Link>
 
-          {/* Assigned Station Details */}
+          <h1>Report Details</h1>
+
+          <p>
+            <strong>Description:</strong> {report.description}
+          </p>
+
+          <p>
+            <strong>Location:</strong>{" "}
+            {renderReportLocation(report.location)}
+            {getGoogleMapsLink(report.location) && (
+              <>
+                {" "}
+                |{" "}
+                <a
+                  href={getGoogleMapsLink(report.location)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="map-link"
+                >
+                  Open in Maps
+                </a>
+              </>
+            )}
+          </p>
+
+          {/* Assigned Station */}
           {report.assignedStation && (
             <div className="station-details">
-              <p><strong>Assigned Station:</strong> {report.assignedStation.name}</p>
-              <p><strong>Station Location:</strong> {report.assignedStation.location}</p>
+              <p>
+                <strong>Assigned Station:</strong>{" "}
+                {report.assignedStation.name}
+              </p>
+              {/*<p>
+                <strong>Station Location:</strong>{" "}
+                {renderStationLocation(report.assignedStation.location)}
+                {getGoogleMapsLink(report.assignedStation.location) && (
+                  <>
+                    {" "}
+                    |{" "}
+                    <a
+                      href={getGoogleMapsLink(
+                        report.assignedStation.location
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="map-link"
+                    >
+                      Open in Maps
+                    </a>
+                  </>
+                )}
+              </p>*/}
             </div>
           )}
 
-          {/* Assigned Officers Table */}
+          {/* Assigned Officers */}
           {report.assignedOfficers && report.assignedOfficers.length > 0 && (
             <div className="officers-section">
               <strong>Assigned Officers:</strong>
@@ -99,25 +207,38 @@ const ReportList = ({ reports }) => {
 
           <p className="status-container">
             <strong>Status:</strong>
-            <span className={`status ${report.status ? report.status.toLowerCase().replace(' ', '-') : 'pending'}`}>
-              {report.status || 'Pending'}
+            <span
+              className={`status ${
+                report.status
+                  ? report.status.toLowerCase().replace(" ", "-")
+                  : "pending"
+              }`}
+            >
+              {report.status || "Pending"}
             </span>
           </p>
 
-          <p><strong>Response:</strong> {report.response || 'The officer still has not responded'}</p>
-          
+          <p>
+            <strong>Response:</strong>{" "}
+            {report.response || "The officer still has not responded"}
+          </p>
 
-          {/* Download Button */}
+          {/* Download */}
           {report.status === "Resolved" && (
             <button
               onClick={() => handleDownload(report._id)}
               className="download-btn"
             >
-              Download Case Investigaton Summary
+              Download Case Investigation Summary
             </button>
           )}
-          <button onClick={()=>navigate('/userpage')} className='back-to-user'>Back to user page</button>
-         
+
+          <button
+            onClick={() => navigate("/userpage")}
+            className="back-to-user"
+          >
+            Back to user page
+          </button>
         </div>
       ))}
     </div>

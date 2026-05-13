@@ -62,22 +62,31 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-
 export const submitReport = async (req, res) => {
   try {
     console.log("Incoming body:", req.body);
-    
-    const { description, location } = req.body;
-    const userId = req.user.id; 
 
-    if (!description || !location) {
+    const { description, location } = req.body;
+    const userId = req.user.id;
+
+    if (!description || !location?.lat || !location?.lng) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    console.log("Location received:", location);
+    const { lat, lng } = location;
+    console.log("Coordinates received:", lat, lng);
 
-    
-    const station = await Station.findOne({ location }).populate("officers");
+    // 🔥 Find nearest police station
+    const station = await Station.findOne({
+      location: {
+        $near: {
+          $geometry: {
+            type: "Point",
+            coordinates: [lng, lat] // IMPORTANT: [lng, lat]
+          }
+        }
+      }
+    }).populate("officers");
 
     if (!station) {
       return res.status(404).json({ message: "No station found for this location" });
@@ -88,43 +97,67 @@ export const submitReport = async (req, res) => {
     const officerIds = station.officers.map(officer => officer._id);
     console.log("Assigned officer IDs:", officerIds);
 
+    // ✅ Create report
     const report = new Report({
-  description,
-  location,
-  userId,                       // ✅ ADD THIS
-  assignedStation: station._id,
-  assignedOfficers: officerIds,
-});
+      description,
+      location,
+      userId,
+      assignedStation: station._id,
+      assignedOfficers: officerIds
+    });
 
     await report.save();
 
-    
+    // ✅ Link report to user
     await User.findByIdAndUpdate(userId, {
-      $push: { reports: report._id },
+      $push: { reports: report._id }
     });
 
-    
-    const emailPromises = station.officers.map(officer => {
-      const mailOptions = {
+    // 📧 EMAIL NOTIFICATION (SAFE)
+    const validOfficers = station.officers.filter(
+      officer => officer.email && officer.email.trim() !== ""
+    );
+
+    const emailPromises = validOfficers.map(officer => {
+      return transporter.sendMail({
         from: `"Harassment Reporting System" <kishorekselvan2005@gmail.com>`,
         to: officer.email,
-        subject: 'New Report Assigned',
-        text: `Dear Officer ${officer.name},\n\nA new harassment report has been submitted for your station (${station.name}).\n\nDescription: ${description}\nLocation: ${location}\n\nPlease take the necessary action.\n\nThank you.`,
-      };
+        subject: "New Report Assigned",
+        text: `Dear Officer ${officer.name},
 
-      return transporter.sendMail(mailOptions);
+A new harassment report has been assigned to your station.
+
+Station: ${station.name}
+Description: ${description}
+Latitude: ${lat}
+Longitude: ${lng}
+
+Please take the necessary action.
+
+Thank you.`
+      });
     });
 
-   
-    await Promise.all(emailPromises);
+    // 🔐 DO NOT FAIL REPORT IF EMAIL FAILS
+    await Promise.all(emailPromises).catch(err => {
+      console.warn(
+        "⚠️ Email sending failed, report still saved:",
+        err.message
+      );
+    });
 
-    res.status(201).json({ message: "Report submitted and officers notified successfully", report });
-    
+    res.status(201).json({
+      message: "Report submitted successfully",
+      report,
+      station: station.name
+    });
+
   } catch (err) {
     console.error("Error submitting report:", err);
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 export const updateReportStatus = async (req, res) => {
   const { reportId, status } = req.body;
