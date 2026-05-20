@@ -1,0 +1,155 @@
+/* PoliceDetails.css */
+
+/* Full screen container */
+.full-screen-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px; /* Account for navbar */
+    z-index: 1;
+  }
+  
+  /* Centered content */
+  .centered-content {
+    width: 90%;
+    max-width: 1000px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin: 20px;
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+  
+  /* Header */
+  .police-details-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .police-details-header h2 {
+    color: #8B0000;
+    font-size: 32px;
+    margin-top: 15px;
+  }
+  
+  .police-details-header span {
+    font-size: 50px;
+  }
+  
+  /* Profile card */
+  .profile-card {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .profile-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .profile-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .profile-icon {
+    font-size: 50px;
+    color: #8B0000;
+    background: rgba(139, 0, 0, 0.1);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .profile-info {
+    flex-grow: 1;
+  }
+  
+  .profile-info h3 {
+    color: #8B0000;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  .detail-row {
+    display: flex;
+    margin-bottom: 15px;
+  }
+  
+  .detail-label {
+    font-weight: 600;
+    color: #555;
+    width: 120px;
+    flex-shrink: 0;
+  }
+  
+  .detail-value {
+    color: #333;
+    flex-grow: 1;
+  }
+  
+  /* Loading and error states */
+  .loading-screen,
+  .error-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 24px;
+    z-index: 100;
+  }
+  
+  .error-screen {
+    color: #d32f2f;
+    font-weight: bold;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .centered-content {
+      padding: 30px 20px;
+      width: 95%;
+    }
+  
+    .profile-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .detail-row {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .detail-label {
+      width: auto;
+      margin-bottom: 5px;
+    }
+  
+    .police-details-header h2 {
+      font-size: 26px;
+    }
+  }

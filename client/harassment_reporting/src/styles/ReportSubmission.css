@@ -1,0 +1,172 @@
+/* Report Submission Styles */
+.report-sub-container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f7fa;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  .temp-alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff4444;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeInOut 3.2s ease-in-out;
+    opacity: 0;
+  }
+  
+  @keyframes fadeInOut {
+    0% { opacity: 0; top: 0; }
+    10% { opacity: 1; top: 20px; }
+    90% { opacity: 1; top: 20px; }
+    100% { opacity: 0; top: 0; }
+  }
+  
+  .report-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 800px;
+    padding: 3rem;
+    margin: 2rem 0;
+  }
+  
+  .report-title {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  .report-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  
+  .form-group label {
+    font-size: 1rem;
+    color: #2c3e50;
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .location-dropdown {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f9fafc;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .location-dropdown:focus {
+    outline: none;
+    border-color: #6e8efb;
+    box-shadow: 0 0 0 3px rgba(110, 142, 251, 0.2);
+    background: white;
+  }
+  
+  .form-group input {
+    height: 50px;
+  }
+  
+  .form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  
+  .location-dropdown {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    cursor: pointer;
+  }
+  
+  .submit-btn {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(110, 142, 251, 0.3);
+  }
+  
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(110, 142, 251, 0.4);
+  }
+  
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .report-sub-container {
+      padding: 1.5rem;
+      align-items: flex-start;
+    }
+  
+    .report-card {
+      padding: 2rem;
+      margin: 1rem 0;
+    }
+  
+    .report-title {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .report-form {
+      gap: 1.4rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .report-card {
+      padding: 1.5rem;
+    }
+  
+    .report-title {
+      font-size: 1.4rem;
+    }
+  
+    .form-group input,
+    .form-group textarea,
+    .location-dropdown {
+      padding: 0.8rem;
+    }
+  
+    .submit-btn {
+      padding: 0.9rem;
+      font-size: 1rem;
+    }
+  }
