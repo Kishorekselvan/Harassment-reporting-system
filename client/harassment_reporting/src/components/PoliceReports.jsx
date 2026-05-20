@@ -64,7 +64,13 @@ function ViewReports() {
                   </span>
                 </p>
                 {report.reportType && <p><strong>Type:</strong> {report.reportType}</p>}
-                {report.location && <p><strong>Location:</strong> {report.location}</p>}
+                {report.location && (
+  <p>
+    <strong>Location:</strong>{" "}
+    {report.location.lat?.toFixed(5)},
+    {report.location.lng?.toFixed(5)}
+  </p>
+)}
               </div>
             ))
           ) : (

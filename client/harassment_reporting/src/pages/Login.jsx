@@ -242,6 +242,7 @@ function Login() {
   const [registerPassword, setRegisterPassword] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
+  const [showFingerprintPopup, setShowFingerprintPopup] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -249,11 +250,15 @@ function Login() {
     console.log("Logging in with:", email, password, role);
 
     try {
+      if(role === "Admin"){
+         setShowFingerprintPopup(true);
+}
       const response = await axios.post('http://localhost:5000/api/auth/login', {
         email,
         password,
         role,
       });
+       setShowFingerprintPopup(false);
 
       console.log("Login successful:", response.data);
       localStorage.setItem('token', response.data.token);
@@ -264,6 +269,7 @@ function Login() {
       else if(role==="Admin") navigate('/adminpage');
       
     } catch (error) {
+      setShowFingerprintPopup(false);
       console.error("Login failed:", error.response?.data || error.message);
       showTemporaryAlert(error.response?.data?.message || 'Login failed. Please try again.');
     }
@@ -303,7 +309,21 @@ function Login() {
           {alertMessage}
         </div>
       )}
+       {showFingerprintPopup && (
+  <div className="fingerprint-popup-overlay">
+    
+    <div className="fingerprint-popup">
 
+      <h2>Fingerprint Verification</h2>
+
+      <p>
+        Place your finger on the scanner...
+      </p>
+
+    </div>
+
+  </div>
+)}
       <div className="login-box">
         <h2 className="login-title">Login</h2>
         <form onSubmit={handleLogin} className="login-form">

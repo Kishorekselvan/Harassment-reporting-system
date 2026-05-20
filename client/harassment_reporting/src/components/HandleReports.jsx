@@ -138,7 +138,10 @@ function HandleReport() {
           
           <div className="detail-card">
             <div className="detail-label">Location</div>
-            <div className="detail-value">{report.location}</div>
+            <div className="detail-value">
+  {report.location?.lat?.toFixed(5)},
+  {report.location?.lng?.toFixed(5)}
+</div>
           </div>
           
           <div className="detail-card">
